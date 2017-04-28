@@ -4,15 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="cn.edu.xmu.android_course.datastorage.MainActivity">
+    tools:context="cn.edu.xmu.android_course.datastorage.MainActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
+        android:id="@+id/label_preference"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="首选项存储区"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/bigger_fries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="薯条加大"
+        android:onClick="onFriesBigger"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_preference" />
+
+    <CheckBox
+        android:id="@+id/bigger_drink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="饮料加大"
+        android:onClick="onDrinkBigger"
+        app:layout_constraintLeft_toRightOf="@id/bigger_fries"
+        app:layout_constraintTop_toBottomOf="@id/label_preference" />
+
+    <TextView
+        android:id="@+id/label_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="文件存储区"
+        app:layout_constraintTop_toBottomOf="@id/bigger_fries"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        app:layout_constraintTop_toBottomOf="@id/label_file"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLoadFromFile"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/buttonLoadFromFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="从文件加载"
+        android:onClick="onLoadFileClick"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/buttonSaveToFile"/>
+
+    <Button
+        android:id="@+id/buttonSaveToFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存到文件"
+        android:onClick="onSaveFileClick"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/buttonLoadFromFile" />
 
 </android.support.constraint.ConstraintLayout>
