@@ -1,6 +1,7 @@
 package cn.edu.xmu.android_course.datastorage;
 
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -132,12 +133,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /* Checks if external storage is available to at least read */
+    private boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available for read and write */
+    private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
     private void externalStorageOpen() {
+        if (isExternalStorageReadable()) {
+
+        }
 
     }
 
     private void externalStorageSave() {
+        if (isExternalStorageWritable()) {
 
+        }
     }
 
     public void onCheckboxClick(View view) {
