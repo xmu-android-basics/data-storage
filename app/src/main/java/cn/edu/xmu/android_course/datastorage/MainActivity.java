@@ -9,7 +9,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
+    private static final String FILENAME = "internal_storage.dat";
+
     private static final String PREFS_NAME = "pref_storage";
     private static final String PREF_BIGGER_FRIES = "is_bigger_fries";
     private static final String PREF_BIGGER_DRINK = "is_bigger_drink";
@@ -65,11 +72,76 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLoadFileClick(View view) {
-        Toast.makeText(this, "文件已加载", Toast.LENGTH_SHORT).show();
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput(FILENAME);
+
+            StringBuffer buffer = new StringBuffer();
+
+            byte[] bytes = new byte[1024];
+
+            int result;
+
+            try {
+                while ((result = fis.read(bytes)) > 0) {
+                    buffer.append(new String(bytes, 0, result));
+                }
+            } catch (IOException e) {
+                Toast.makeText(this, "读文件错误: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+                e.printStackTrace();
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        Toast.makeText(this, "无法关闭文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            inputText.setText(buffer.toString());
+            Toast.makeText(this, "文件已加载", Toast.LENGTH_SHORT).show();
+
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, "找不到文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+            e.printStackTrace();
+        }
     }
 
     public void onSaveFileClick(View view) {
-        Toast.makeText(this, "文件已保存", Toast.LENGTH_SHORT).show();
+        FileOutputStream fos = null;
+        try {
+            fos = openFileOutput(FILENAME, MODE_PRIVATE);
+
+            try {
+                fos.write(inputText.getText().toString().getBytes());
+            } catch (IOException e) {
+                Toast.makeText(this, "写文件错误: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+                e.printStackTrace();
+            } finally {
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        Toast.makeText(this, "无法关闭文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            Toast.makeText(this, "文件已保存至" + getFileStreamPath(FILENAME), Toast.LENGTH_SHORT).show();
+
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, "找不到文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+            e.printStackTrace();
+        }
     }
 
 }
