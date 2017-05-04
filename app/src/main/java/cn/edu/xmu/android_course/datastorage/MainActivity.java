@@ -52,14 +52,14 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    public void onFriesBigger(View view) {
-        savePreferenceBooleanValue(PREF_BIGGER_FRIES, bigger_fries.isChecked());
-
-        Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onDrinkBigger(View view) {
-        savePreferenceBooleanValue(PREF_BIGGER_DRINK, bigger_drink.isChecked());
+    public void onCheckboxClick(View view) {
+        switch (view.getId()) {
+            case R.id.bigger_fries:
+                savePreferenceBooleanValue(PREF_BIGGER_FRIES, ((CheckBox)view).isChecked());
+                break;
+            case R.id.bigger_drink:
+                savePreferenceBooleanValue(PREF_BIGGER_DRINK, ((CheckBox)view).isChecked());
+        }
 
         Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
     }
