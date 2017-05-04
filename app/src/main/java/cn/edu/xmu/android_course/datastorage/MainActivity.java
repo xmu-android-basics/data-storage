@@ -16,7 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String FILENAME = "internal_storage.dat";
+    private static final String INTERNAL_FILENAME = "internal_storage.dat";
+    private static final String EXTERNAL_FILENAME = "external_storage.txt";
 
     private static final String PREFS_NAME = "pref_storage";
     private static final String PREF_BIGGER_FRIES = "is_bigger_fries";
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private void internalStorageOpen() {
         FileInputStream fis = null;
         try {
-            fis = openFileInput(FILENAME);
+            fis = openFileInput(INTERNAL_FILENAME);
 
             StringBuffer buffer = new StringBuffer();
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     buffer.append(new String(bytes, 0, result));
                 }
             } catch (IOException e) {
-                Toast.makeText(this, "读文件错误: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "读文件错误: " + getFileStreamPath(INTERNAL_FILENAME), Toast.LENGTH_LONG).show();
 
                 e.printStackTrace();
             } finally {
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         fis.close();
                     } catch (IOException e) {
-                        Toast.makeText(this, "无法关闭文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "无法关闭文件: " + getFileStreamPath(INTERNAL_FILENAME), Toast.LENGTH_LONG).show();
 
                         e.printStackTrace();
                     }
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "文件已加载", Toast.LENGTH_SHORT).show();
 
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, "找不到文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "找不到文件: " + getFileStreamPath(INTERNAL_FILENAME), Toast.LENGTH_LONG).show();
 
             e.printStackTrace();
         }
@@ -104,12 +105,12 @@ public class MainActivity extends AppCompatActivity {
     private void internalStorageSave() {
         FileOutputStream fos = null;
         try {
-            fos = openFileOutput(FILENAME, MODE_PRIVATE);
+            fos = openFileOutput(INTERNAL_FILENAME, MODE_PRIVATE);
 
             try {
                 fos.write(inputText.getText().toString().getBytes());
             } catch (IOException e) {
-                Toast.makeText(this, "写文件错误: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "写文件错误: " + getFileStreamPath(INTERNAL_FILENAME), Toast.LENGTH_LONG).show();
 
                 e.printStackTrace();
             } finally {
@@ -117,17 +118,17 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         fos.close();
                     } catch (IOException e) {
-                        Toast.makeText(this, "无法关闭文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "无法关闭文件: " + getFileStreamPath(INTERNAL_FILENAME), Toast.LENGTH_LONG).show();
 
                         e.printStackTrace();
                     }
                 }
             }
 
-            Toast.makeText(this, "文件已保存至" + getFileStreamPath(FILENAME), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "文件已保存至" + getFileStreamPath(INTERNAL_FILENAME), Toast.LENGTH_SHORT).show();
 
         } catch (FileNotFoundException e) {
-            Toast.makeText(this, "找不到文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "找不到文件: " + getFileStreamPath(INTERNAL_FILENAME), Toast.LENGTH_LONG).show();
 
             e.printStackTrace();
         }
