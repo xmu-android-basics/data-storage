@@ -132,6 +132,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void externalStorageOpen() {
+
+    }
+
+    private void externalStorageSave() {
+
+    }
+
     public void onCheckboxClick(View view) {
         switch (view.getId()) {
             case R.id.bigger_fries:
@@ -145,11 +153,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLoadFileClick(View view) {
-        internalStorageOpen();
+        externalStorageOpen();
     }
 
     public void onSaveFileClick(View view) {
-        internalStorageSave();
+        externalStorageSave();
     }
 
 }
