@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -46,7 +47,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLoadFileClick(View view) {
-        Toast.makeText(this, "文件已加载", Toast.LENGTH_SHORT).show();
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            StringBuffer buffer = new StringBuffer();
+
+            byte[] bytes = new byte[1024];
+
+            int result;
+            while ((result = fis.read(bytes)) > 0) {
+                buffer.append(new String(bytes, 0, result));
+            }
+
+            fis.close();
+
+            inputText.setText(buffer.toString());
+
+            Toast.makeText(this, "文件已加载", Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, "无法创建/打开文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+            e.printStackTrace();
+        } catch (IOException e) {
+            Toast.makeText(this, "文件操作错误: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+            e.printStackTrace();
+        }
     }
 
     public void onSaveFileClick(View view) {
