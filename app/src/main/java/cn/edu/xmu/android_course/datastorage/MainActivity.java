@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "pref_storage";
+    private static final String PREF_BIGGER_FRIES = "is_bigger_fries";
+    private static final String PREF_BIGGER_DRINK = "is_bigger_drink";
 
     private CheckBox bigger_fries;
     private CheckBox bigger_drink;
@@ -35,17 +37,17 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 
-        boolean is_bigger_fries = settings.getBoolean("is_bigger_fries", false);
+        boolean is_bigger_fries = settings.getBoolean(PREF_BIGGER_FRIES, false);
         bigger_fries.setChecked(is_bigger_fries);
 
-        boolean is_bigger_drink = settings.getBoolean("is_bigger_drink", false);
+        boolean is_bigger_drink = settings.getBoolean(PREF_BIGGER_DRINK, false);
         bigger_drink.setChecked(is_bigger_drink);
     }
 
     public void onFriesBigger(View view) {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("is_bigger_fries", bigger_fries.isChecked());
+        editor.putBoolean(PREF_BIGGER_FRIES, bigger_fries.isChecked());
 
         editor.commit();
 
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public void onDrinkBigger(View view) {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("is_bigger_drink", bigger_drink.isChecked());
+        editor.putBoolean(PREF_BIGGER_DRINK, bigger_drink.isChecked());
 
         editor.commit();
 
