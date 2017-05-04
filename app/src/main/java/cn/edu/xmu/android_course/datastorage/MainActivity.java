@@ -39,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFriesBigger(View view) {
+        SharedPreferences settings = getSharedPreferences("preference_storage", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("is_bigger_fries", bigger_fries.isChecked());
+
+        editor.commit();
+
         Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
     }
 
