@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         loadFileButton = (Button) findViewById(R.id.buttonLoadFromFile);
         saveFileButton = (Button) findViewById(R.id.buttonSaveToFile);
 
-        SharedPreferences settings = getSharedPreferences("preference_storage", 0);
+        SharedPreferences settings = getSharedPreferences("pref_storage", 0);
 
         boolean is_bigger_fries = settings.getBoolean("is_bigger_fries", false);
         bigger_fries.setChecked(is_bigger_fries);
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onFriesBigger(View view) {
-        SharedPreferences settings = getSharedPreferences("preference_storage", 0);
+        SharedPreferences settings = getSharedPreferences("pref_storage", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("is_bigger_fries", bigger_fries.isChecked());
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onDrinkBigger(View view) {
-        SharedPreferences settings = getSharedPreferences("preference_storage", 0);
+        SharedPreferences settings = getSharedPreferences("pref_storage", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("is_bigger_drink", bigger_drink.isChecked());
 
