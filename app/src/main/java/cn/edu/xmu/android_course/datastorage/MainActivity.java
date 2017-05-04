@@ -8,6 +8,10 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
     private static final String FILENAME = "internal_storage.dat";
 
@@ -46,7 +50,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSaveFileClick(View view) {
-        Toast.makeText(this, "文件已保存", Toast.LENGTH_SHORT).show();
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME, MODE_PRIVATE);
+
+            fos.write(inputText.getText().toString().getBytes());
+
+            fos.close();
+
+            Toast.makeText(this, "文件已保存至" + getFileStreamPath(FILENAME), Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, "无法创建/打开文件: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+            e.printStackTrace();
+        } catch (IOException e) {
+            Toast.makeText(this, "文件操作错误: " + getFileStreamPath(FILENAME), Toast.LENGTH_LONG).show();
+
+            e.printStackTrace();
+        }
     }
 
 }
