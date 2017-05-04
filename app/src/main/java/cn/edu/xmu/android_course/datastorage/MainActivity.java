@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
         boolean is_bigger_fries = settings.getBoolean("is_bigger_fries", false);
         bigger_fries.setChecked(is_bigger_fries);
+
+        boolean is_bigger_drink = settings.getBoolean("is_bigger_drink", false);
+        bigger_drink.setChecked(is_bigger_drink);
     }
 
     public void onFriesBigger(View view) {
@@ -49,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onDrinkBigger(View view) {
+        SharedPreferences settings = getSharedPreferences("preference_storage", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("is_bigger_drink", bigger_drink.isChecked());
+
+        editor.commit();
+
         Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
     }
 
