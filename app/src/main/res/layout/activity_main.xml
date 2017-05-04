@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="薯条加大"
-        android:onClick="onFriesBigger"
+        android:onClick="onCheckboxClick"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/label_preference" />
 
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="饮料加大"
-        android:onClick="onDrinkBigger"
+        android:onClick="onCheckboxClick"
         app:layout_constraintLeft_toRightOf="@id/bigger_fries"
         app:layout_constraintTop_toBottomOf="@id/label_preference" />
 
