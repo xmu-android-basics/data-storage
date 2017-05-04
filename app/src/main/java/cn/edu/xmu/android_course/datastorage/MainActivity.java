@@ -59,19 +59,7 @@ public class MainActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    public void onCheckboxClick(View view) {
-        switch (view.getId()) {
-            case R.id.bigger_fries:
-                savePreferenceBooleanValue(PREF_BIGGER_FRIES, ((CheckBox)view).isChecked());
-                break;
-            case R.id.bigger_drink:
-                savePreferenceBooleanValue(PREF_BIGGER_DRINK, ((CheckBox)view).isChecked());
-        }
-
-        Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onLoadFileClick(View view) {
+    private void internalStorageOpen() {
         FileInputStream fis = null;
         try {
             fis = openFileInput(FILENAME);
@@ -112,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onSaveFileClick(View view) {
+    private void internalStorageSave() {
         FileOutputStream fos = null;
         try {
             fos = openFileOutput(FILENAME, MODE_PRIVATE);
@@ -142,6 +130,26 @@ public class MainActivity extends AppCompatActivity {
 
             e.printStackTrace();
         }
+    }
+
+    public void onCheckboxClick(View view) {
+        switch (view.getId()) {
+            case R.id.bigger_fries:
+                savePreferenceBooleanValue(PREF_BIGGER_FRIES, ((CheckBox)view).isChecked());
+                break;
+            case R.id.bigger_drink:
+                savePreferenceBooleanValue(PREF_BIGGER_DRINK, ((CheckBox)view).isChecked());
+        }
+
+        Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onLoadFileClick(View view) {
+        internalStorageOpen();
+    }
+
+    public void onSaveFileClick(View view) {
+        internalStorageSave();
     }
 
 }
