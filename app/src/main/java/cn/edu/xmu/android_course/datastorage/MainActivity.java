@@ -44,22 +44,22 @@ public class MainActivity extends AppCompatActivity {
         bigger_drink.setChecked(is_bigger_drink);
     }
 
-    public void onFriesBigger(View view) {
+    private void savePreferenceBooleanValue(String name, boolean value) {
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean(PREF_BIGGER_FRIES, bigger_fries.isChecked());
+        editor.putBoolean(name, value);
 
         editor.commit();
+    }
+
+    public void onFriesBigger(View view) {
+        savePreferenceBooleanValue(PREF_BIGGER_FRIES, bigger_fries.isChecked());
 
         Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
     }
 
     public void onDrinkBigger(View view) {
-        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean(PREF_BIGGER_DRINK, bigger_drink.isChecked());
-
-        editor.commit();
+        savePreferenceBooleanValue(PREF_BIGGER_DRINK, bigger_drink.isChecked());
 
         Toast.makeText(this, "首选项设置已保存", Toast.LENGTH_SHORT).show();
     }
