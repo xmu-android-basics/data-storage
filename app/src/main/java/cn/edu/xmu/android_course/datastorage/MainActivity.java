@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String FILENAME = "internal_storage.dat";
 
     private CheckBox bigger_fries;
     private CheckBox bigger_drink;
