@@ -1,5 +1,6 @@
 package cn.edu.xmu.android_course.datastorage;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
 
         loadFileButton = (Button) findViewById(R.id.buttonLoadFromFile);
         saveFileButton = (Button) findViewById(R.id.buttonSaveToFile);
+
+        SharedPreferences settings = getSharedPreferences("preference_storage", 0);
+
+        boolean is_bigger_fries = settings.getBoolean("is_bigger_fries", false);
+        bigger_fries.setChecked(is_bigger_fries);
     }
 
     public void onFriesBigger(View view) {
