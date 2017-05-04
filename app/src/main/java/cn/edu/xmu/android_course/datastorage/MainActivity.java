@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -151,6 +152,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    private File getExternalStorageFile() {
+        return new File(getExternalFilesDir(null), EXTERNAL_FILENAME);
     }
 
     private void externalStorageOpen() {
