@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String FILENAME = "internal_storage.dat";
+
     private static final String PREFS_NAME = "pref_storage";
     private static final String PREF_BIGGER_FRIES = "is_bigger_fries";
     private static final String PREF_BIGGER_DRINK = "is_bigger_drink";
