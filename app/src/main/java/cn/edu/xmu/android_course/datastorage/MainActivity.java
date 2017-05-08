@@ -10,11 +10,13 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MainActivity extends AppCompatActivity {
     private static final String INTERNAL_FILENAME = "internal_storage.dat";
@@ -163,24 +165,37 @@ public class MainActivity extends AppCompatActivity {
 
         if (isExternalStorageReadable()) {
             FileInputStream fis = null;
+            BufferedReader bufferedReader = null;
             try {
                 fis = new FileInputStream(file);
+                bufferedReader = new BufferedReader(new InputStreamReader(fis));
 
                 StringBuffer buffer = new StringBuffer();
 
-                byte[] bytes = new byte[1024];
-
-                int result;
-
                 try {
-                    while ((result = fis.read(bytes)) > 0) {
-                        buffer.append(new String(bytes, 0, result));
+                    String line = bufferedReader.readLine();
+                    while ( line != null) {
+                        buffer.append(line + "\n");
+                        line = bufferedReader.readLine();
                     }
+                    /*
+                     * 删除最后一行文本 append 进去的 \n
+                     * TODO: 但是如何判断原本最后一行是有换行的？
+                     */
+                    buffer.deleteCharAt(buffer.length() -1);
                 } catch (IOException e) {
                     Toast.makeText(this, "读文件错误: " + file.getAbsolutePath(), Toast.LENGTH_LONG).show();
 
                     e.printStackTrace();
                 } finally {
+                    if ( bufferedReader != null ) {
+                        try {
+                            bufferedReader.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     if (fis != null) {
                         try {
                             fis.close();
